@@ -179,7 +179,14 @@ curl -X POST http://localhost:3443/api/auth/login \
 ### Run Tests
 
 ```bash
-npm test
+# Run all tests
+npm run test:all
+
+# Individual test suites
+npm test                    # Regex validation tests
+npm run test:api           # Comprehensive API functionality tests
+npm run test:security      # Security headers and HTTPS tests
+npm run test:health        # Quick health check
 ```
 
 ---
