@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
+import Accounts from './pages/Accounts';
 import './App.css';
 
 // Protected Route Component
@@ -44,9 +45,7 @@ function AppRoutes() {
           path="/accounts"
           element={
             <ProtectedRoute>
-              <div style={{ padding: '100px 20px', textAlign: 'center' }}>
-                <h1>Accounts Coming Soon!</h1>
-              </div>
+              <Accounts />
             </ProtectedRoute>
           }
         />

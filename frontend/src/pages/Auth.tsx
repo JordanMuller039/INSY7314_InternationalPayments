@@ -76,7 +76,7 @@ const Auth = () => {
               <div className="logo-icon-large">
                 <CreditCard size={48} />
               </div>
-              <h1>SecureBank</h1>
+              <h1>Turtle Shell Banking</h1>
             </div>
             
             <div className="info-text">

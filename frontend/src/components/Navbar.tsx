@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="logo-icon">
             <CreditCard size={28} />
           </div>
-          <span>SecureBank</span>
+          <span>Turtle Shell Banking</span>
         </Link>
 
         {user && (

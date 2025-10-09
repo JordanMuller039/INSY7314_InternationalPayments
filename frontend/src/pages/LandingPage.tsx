@@ -54,7 +54,7 @@ const LandingPage = () => {
               >
                 <div className="card-inner">
                   <div className="card-header">
-                    <span>SecureBank Account</span>
+                    <span>Turtle Shell Account</span>
                     <Shield size={24} />
                   </div>
                   <div className="card-balance">
@@ -75,7 +75,7 @@ const LandingPage = () => {
       {/* Features Section */}
       <section className="features-section">
         <div className="section-header">
-          <h2 className="section-title">Why Choose SecureBank</h2>
+          <h2 className="section-title">Why Choose Turtle Shell Banking</h2>
           <p className="section-description">
             Built with security and simplicity at its core
           </p>
@@ -159,7 +159,7 @@ const LandingPage = () => {
         >
           <div className="cta-content">
             <h2>Ready to Transform Your Banking?</h2>
-            <p>Join thousands of users who trust SecureBank for their financial needs</p>
+            <p>Join thousands of users who trust Turtle Shell for their financial needs</p>
             <Link to="/auth" className="cta-button">
               Create Free Account
               <ArrowRight size={20} />
