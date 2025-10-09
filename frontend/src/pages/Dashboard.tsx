@@ -93,6 +93,7 @@ const Dashboard = () => {
             animationSpeed={10}
             borderWidth={3}
             borderRadius={24}
+            backgroundColor="transparent"
           >
             <div className="balance-content">
               <div className="balance-header">
@@ -161,7 +162,7 @@ const Dashboard = () => {
           </div>
         </section>
 
-        {/* Accounts Grid */}
+         {/* Accounts Grid */}
         <section className="accounts-section">
           <div className="section-header">
             <h2 className="section-title">My Accounts</h2>
@@ -178,8 +179,9 @@ const Dashboard = () => {
                 animationMode="rotate-on-hover"
                 animationSpeed={3}
                 borderRadius={16}
+                backgroundColor="transparent"
               >
-                <div className="account-card-content">
+                <div className="account-card-inner">
                   <div className="account-type">
                     <CreditCard size={20} />
                     <span>{account.accountType}</span>
@@ -196,7 +198,7 @@ const Dashboard = () => {
           </div>
         </section>
 
-        {/* Recent Transactions */}
+       {/* Recent Transactions */}
         <section className="transactions-section">
           <div className="section-header">
             <h2 className="section-title">Recent Transactions</h2>
@@ -210,8 +212,9 @@ const Dashboard = () => {
             animationMode="stop-rotate-on-hover"
             animationSpeed={8}
             borderRadius={20}
+            backgroundColor="transparent"
           >
-            <div className="transactions-list">
+            <div className="transactions-inner">
               {recentTransactions.length > 0 ? (
                 recentTransactions.map((transaction) => (
                   <div key={transaction._id} className="transaction-item">

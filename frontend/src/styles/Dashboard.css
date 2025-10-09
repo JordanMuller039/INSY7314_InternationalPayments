@@ -75,12 +75,21 @@
 }
 
 .balance-card {
-  padding: 40px;
-  background: linear-gradient(135deg, #0A4D3C 0%, #0F6B56 100%);
+  padding: 0;
+  background: transparent;
+  min-height: 200px;
+  overflow: hidden;
 }
 
 .balance-content {
+  background: linear-gradient(135deg, #0A4D3C 0%, #0F6B56 100%);
+  padding: 40px;
   color: white;
+  min-height: 200px;
+  border-radius: 21px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .balance-header {
@@ -261,20 +270,33 @@
 }
 
 .account-card-small {
-  padding: 24px;
-  background: white;
+  padding: 0;
+  background: transparent;
   cursor: pointer;
   transition: transform 0.3s ease;
+  overflow: hidden;
 }
 
 .account-card-small:hover {
   transform: translateY(-4px);
 }
 
-.account-card-content {
+.account-card-inner {
+  background: white;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-radius: 13px;
+}
+
+.account-card-content {
+  background: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 13px;
 }
 
 .account-type {
@@ -305,14 +327,27 @@
 }
 
 .transactions-card {
-  padding: 32px;
-  background: white;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
 }
 
-.transactions-list {
+.transactions-inner {
+  background: white;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border-radius: 17px;
+}
+
+.transactions-list {
+  background: white;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 17px;
 }
 
 .transaction-item {
