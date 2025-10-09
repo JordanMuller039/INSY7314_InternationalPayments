@@ -45,12 +45,33 @@ app.use(hpp());
 
 // SECURITY LAYER 4: CORS configuration for banking security
 // Cross-Origin Resource Sharing - controls which websites can access our banking API
+// Updated to support both HTTP (development) and potential HTTPS (production)
+const allowedOrigins = [
+  'http://localhost:3000',      // React default
+  'http://localhost:5173',      // Vite default
+  'http://localhost:5174',      // Vite alternate port
+  'https://localhost:3000',     // HTTPS React
+  'https://localhost:5173',     // HTTPS Vite
+];
+
 const corsOptions = {
-  // Only allow requests from approved frontend domains (prevents malicious sites accessing user accounts)
-  origin: process.env.CORS_ALLOW_LIST ? process.env.CORS_ALLOW_LIST.split(',') : ['http://localhost:3000', 'http://localhost:5173'],
+  // Allow requests from approved frontend domains
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in allowed list
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('❌ Blocked by CORS:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true, // Allow authentication cookies/headers
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Restrict HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Only allow necessary headers
+  allowedHeaders: ['Content-Type', 'Authorization'], // Only allow necessary headers
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 app.use(cors(corsOptions));
 
