@@ -1,0 +1,476 @@
+.transactions-page {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f5f1 100%);
+}
+
+.transactions-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  animation: slideUp 0.6s ease-out;
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #052E23;
+  margin-bottom: 8px;
+}
+
+.header-content p {
+  font-size: 1.125rem;
+  color: #0F6B56;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: white;
+  color: #0A4D3C;
+  border: 2px solid #E8F5F1;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(10, 77, 60, 0.08);
+}
+
+.export-btn:hover {
+  background: #E8F5F1;
+  border-color: #14B886;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 77, 60, 0.15);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+  animation: slideUp 0.7s ease-out;
+}
+
+.stat-card {
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card-inner {
+  background: white;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 13px;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.sent {
+  background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+  color: #991B1B;
+}
+
+.stat-icon.received {
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+  color: #065F46;
+}
+
+.stat-icon.total {
+  background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+  color: #1E40AF;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #052E23;
+}
+
+/* Controls */
+.controls-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+  animation: slideUp 0.8s ease-out;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: white;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(10, 77, 60, 0.05);
+}
+
+.search-box:focus-within {
+  border-color: #14B886;
+  box-shadow: 0 0 0 3px rgba(20, 184, 134, 0.1);
+}
+
+.search-box svg {
+  color: #666;
+  flex-shrink: 0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #052E23;
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 12px 24px;
+  background: white;
+  color: #0F6B56;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: #14B886;
+  background: #E8F5F1;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #0A4D3C 0%, #14B886 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(10, 77, 60, 0.3);
+}
+
+/* Transactions List */
+.transactions-list-section {
+  animation: slideUp 0.9s ease-out;
+}
+
+.transactions-list-card {
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.transactions-list-inner {
+  background: white;
+  padding: 32px;
+  border-radius: 17px;
+}
+
+.transaction-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  background: #F9FAFB;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.transaction-row:hover {
+  background: #E8F5F1;
+  transform: translateX(4px);
+}
+
+.transaction-row:last-child {
+  margin-bottom: 0;
+}
+
+.transaction-icon-wrapper {
+  display: flex;
+}
+
+.transaction-type-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.transaction-type-icon.payment,
+.transaction-type-icon.withdrawal {
+  color: #EF4444;
+}
+
+.transaction-type-icon.deposit,
+.transaction-type-icon.transfer {
+  color: #14B886;
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.transaction-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transaction-title {
+  font-weight: 600;
+  color: #052E23;
+  font-size: 1rem;
+}
+
+.transaction-id {
+  font-size: 0.75rem;
+  color: #999;
+  font-family: 'Courier New', monospace;
+}
+
+.transaction-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: #666;
+}
+
+.transaction-amount-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.transaction-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.transaction-amount.negative {
+  color: #EF4444;
+}
+
+.transaction-amount.positive {
+  color: #14B886;
+}
+
+.transaction-currency {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.transaction-status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.transaction-status-badge.completed {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.transaction-status-badge.pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.transaction-status-badge.processing {
+  background: #DBEAFE;
+  color: #1E40AF;
+}
+
+.transaction-status-badge.failed,
+.transaction-status-badge.cancelled {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.view-details-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: #E8F5F1;
+  color: #0A4D3C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background: #14B886;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Empty State */
+.empty-transactions {
+  text-align: center;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.empty-transactions svg {
+  color: #0F6B56;
+  opacity: 0.3;
+  margin-bottom: 24px;
+}
+
+.empty-transactions h3 {
+  font-size: 1.5rem;
+  color: #052E23;
+  margin-bottom: 8px;
+}
+
+.empty-transactions p {
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.make-payment-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #0A4D3C 0%, #14B886 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(10, 77, 60, 0.3);
+  text-decoration: none;
+}
+
+.make-payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(10, 77, 60, 0.4);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .controls-section {
+    flex-direction: column;
+  }
+
+  .filter-buttons {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .transactions-page {
+    padding: 80px 16px 40px;
+  }
+
+  .transactions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-content h1 {
+    font-size: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transaction-row {
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .transaction-amount-wrapper,
+  .transaction-status-badge,
+  .view-details-btn {
+    grid-column: 2;
+  }
+
+  .transaction-amount-wrapper {
+    justify-self: start;
+  }
+}

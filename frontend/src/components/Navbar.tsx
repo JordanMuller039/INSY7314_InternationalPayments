@@ -14,34 +14,34 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          <div className="logo-icon">
-            <CreditCard size={28} />
-          </div>
-          <span>Turtle Shell Banking</span>
-        </Link>
+  <div className="navbar-container">
+    <Link to="/" className="navbar-logo">
+      <div className="logo-icon">
+        <img src="/icon.png" alt="Turtle Shell Banking" className="logo-image" />
+      </div>
+      <span>Turtle Shell Banking</span>
+    </Link>
 
-        {user && (
-          <div className="navbar-links">
-            <Link to="/dashboard" className="nav-link">
-              <Home size={18} />
-              <span>Dashboard</span>
-            </Link>
-            <Link to="/accounts" className="nav-link">
-              <CreditCard size={18} />
-              <span>Accounts</span>
-            </Link>
-            <Link to="/payments" className="nav-link">
-              <Send size={18} />
-              <span>Payments</span>
-            </Link>
-            <Link to="/transactions" className="nav-link">
-              <History size={18} />
-              <span>Transactions</span>
-            </Link>
-          </div>
-        )}
+    {user && (
+      <div className="navbar-links">
+        <Link to="/dashboard" className="nav-link">
+          <Home size={18} />
+          <span>Dashboard</span>
+        </Link>
+        <Link to="/accounts" className="nav-link">
+          <CreditCard size={18} />
+          <span>Accounts</span>
+        </Link>
+        <Link to="/payments" className="nav-link">
+          <Send size={18} />
+          <span>Payments</span>
+        </Link>
+        <Link to="/transactions" className="nav-link">
+          <History size={18} />
+          <span>Transactions</span>
+        </Link>
+      </div>
+    )}
 
         <div className="navbar-actions">
           {user ? (

@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
+import Transactions from './pages/Transactions';
+import Payments from './pages/Payments';
 import Accounts from './pages/Accounts';
 import './App.css';
 
@@ -53,9 +55,7 @@ function AppRoutes() {
           path="/payments"
           element={
             <ProtectedRoute>
-              <div style={{ padding: '100px 20px', textAlign: 'center' }}>
-                <h1>Payments Coming Soon!</h1>
-              </div>
+              <Payments />
             </ProtectedRoute>
           }
         />
@@ -63,9 +63,7 @@ function AppRoutes() {
           path="/transactions"
           element={
             <ProtectedRoute>
-              <div style={{ padding: '100px 20px', textAlign: 'center' }}>
-                <h1>Transactions Coming Soon!</h1>
-              </div>
+              <Transactions />
             </ProtectedRoute>
           }
         />

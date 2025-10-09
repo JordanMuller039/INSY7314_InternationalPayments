@@ -262,9 +262,26 @@
   }
 
   .logo-icon {
-    width: 36px;
-    height: 36px;
-  }
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.navbar-logo:hover .logo-icon {
+  transform: rotate(5deg) scale(1.05);
+}
 
   .login-btn {
     padding: 8px 16px;
