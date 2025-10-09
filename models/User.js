@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+// User Model Schema - Francois Smit Banking Security Implementation
+// Defines user data structure with validation and password security
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -66,11 +68,14 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Hash password before saving
+// CRITICAL SECURITY: Password hashing middleware
+// Runs before saving user to database - hashes password for secure storage
 userSchema.pre('save', async function(next) {
+  // Only hash if password was modified (prevents re-hashing on user updates)
   if (!this.isModified('password')) return next();
   
   try {
+    // Use 12 salt rounds for banking-grade security (takes ~300ms to hash)
     const saltRounds = parseInt(process.env.BCRYPT_ROUNDS) || 12;
     this.password = await bcrypt.hash(this.password, saltRounds);
     next();
@@ -79,15 +84,16 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// Compare password method
+// Password verification method for login authentication
 userSchema.methods.comparePassword = async function(candidatePassword) {
+  // Uses bcrypt's secure comparison to verify password against hash
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Remove password from JSON output
+// Security measure: Never expose password hashes in API responses
 userSchema.methods.toJSON = function() {
   const userObject = this.toObject();
-  delete userObject.password;
+  delete userObject.password; // Remove sensitive password hash from output
   return userObject;
 };
 

@@ -2,21 +2,22 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Account = require('../models/Account');
 
-// Generate JWT token
+// JWT Token Generator - Francois Smit INSY7314 Banking Security Implementation
+// Critical security function: Creates signed tokens for user authentication
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '24h'
+    expiresIn: process.env.JWT_EXPIRES_IN || '24h' // 24h expiry balances security vs usability
   });
 };
 
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
+// User Registration Endpoint - Banking Account Creation
+// Route: POST /api/auth/register (Public access - anyone can create account)
 const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, idNumber, accountNumber } = req.body;
 
-    // Check if user already exists
+    // Security Check: Prevent duplicate accounts (critical for banking)
+    // Check email, ID number, AND account number to prevent fraud
     const existingUser = await User.findOne({
       $or: [{ email }, { idNumber }, { accountNumber }]
     });
