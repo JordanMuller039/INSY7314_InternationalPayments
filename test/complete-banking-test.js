@@ -175,7 +175,7 @@ class BankingAPITester {
     const headers = { Authorization: `Bearer ${this.authToken}` };
     const paymentData = {
       fromAccount: this.testUser.accountNumber,
-      toAccount: '9876543210',
+      recipientAccount: '9876543210', // Fixed: Changed from 'toAccount' to 'recipientAccount'
       amount: 150.75,
       currency: 'USD',
       recipientName: 'John International',

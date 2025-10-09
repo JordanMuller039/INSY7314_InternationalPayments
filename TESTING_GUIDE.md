@@ -61,7 +61,7 @@ node test/complete-banking-test.js
    
    {
      "fromAccount": "ACC987654321",
-     "toAccount": "INTL123456789", 
+     "recipientAccount": "INTL123456789", 
      "amount": 250.50,
      "currency": "USD",
      "recipientName": "John International",
