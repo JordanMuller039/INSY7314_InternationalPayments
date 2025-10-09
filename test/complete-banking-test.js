@@ -176,7 +176,7 @@ class BankingAPITester {
     const paymentData = {
       fromAccount: this.testUser.accountNumber,
       recipientAccount: '9876543210', // Fixed: Changed from 'toAccount' to 'recipientAccount'
-      amount: 150.75,
+      amount: 10.00, // Small amount to avoid insufficient funds
       currency: 'USD',
       recipientName: 'John International',
       recipientBank: 'Example International Bank',
