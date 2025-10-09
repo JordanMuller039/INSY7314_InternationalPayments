@@ -74,8 +74,19 @@ const Payments = () => {
     }
 
     try {
-      // Build payload - only include optional fields if they have values
-      const paymentPayload: any = {
+      interface PaymentPayload {
+        fromAccount: string;
+        recipientName: string;
+        recipientAccount: string;
+        recipientBank: string;
+        amount: number;
+        currency: string;
+        swiftCode: string;
+        reference?: string;
+        description?: string;
+      }
+
+      const paymentPayload: PaymentPayload = {
         fromAccount: paymentData.fromAccount,
         recipientName: paymentData.recipientName.trim(),
         recipientAccount: paymentData.recipientAccount.trim(),
@@ -102,18 +113,19 @@ const Payments = () => {
       setTimeout(() => {
         navigate('/transactions');
       }, 2000);
-    } catch (err: any) {
-      console.error('Payment error:', err.response?.data); // Debug log
+    } catch (err) {
+      const error = err as { response?: { data?: { details?: Array<{ msg: string }>; error?: string } } };
+      console.error('Payment error:', error.response?.data); // Debug log
       
       // Better error handling
-      if (err.response?.data?.details) {
+      if (error.response?.data?.details) {
         // Validation errors
-        const validationErrors = err.response.data.details
-          .map((detail: any) => detail.msg)
+        const validationErrors = error.response.data.details
+          .map((detail) => detail.msg)
           .join(', ');
         setError(validationErrors);
-      } else if (err.response?.data?.error) {
-        setError(err.response.data.error);
+      } else if (error.response?.data?.error) {
+        setError(error.response.data.error);
       } else {
         setError('Payment failed. Please check your details and try again.');
       }
