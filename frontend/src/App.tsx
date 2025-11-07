@@ -8,6 +8,7 @@ import Transactions from './pages/Transactions';
 import Payments from './pages/Payments';
 import Accounts from './pages/Accounts';
 import AdminDashboard from './pages/Admin';
+import EmployeesPage from './pages/Employees';
 import './App.css';
 
 // Protected Route Component
@@ -75,6 +76,15 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               {user && user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/dashboard" />}
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/employees"
+          element={
+            <ProtectedRoute>
+              {user && (user.role === 'employee' || user.role === 'admin') ? <EmployeesPage /> : <Navigate to="/dashboard" />}
             </ProtectedRoute>
           }
         />

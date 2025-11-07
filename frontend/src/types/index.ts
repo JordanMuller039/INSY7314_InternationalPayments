@@ -7,6 +7,8 @@ export interface User {
   role: string;
   accountNumber?: string;
   idNumber?: string;
+  isActive?: boolean;
+  isVerified?: boolean;
   lastLogin?: Date;
 }
 

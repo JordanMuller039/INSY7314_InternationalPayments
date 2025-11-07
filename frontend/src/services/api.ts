@@ -44,6 +44,13 @@ export const authAPI = {
     api.post('/auth/register-employee', data),
 };
 
+export const usersAPI = {
+  getCustomers: (): Promise<AxiosResponse<{ customers: User[] }>> => api.get('/users/customers'),
+  getAllUsers: (): Promise<AxiosResponse<{ users: User[] }>> => api.get('/users'),
+  updateUser: (id: string, data: Partial<User & { password?: string }>): Promise<AxiosResponse<{ message: string; user?: User }>> => api.put(`/users/${id}`, data),
+  deleteUser: (id: string): Promise<AxiosResponse<{ message: string }>> => api.delete(`/users/${id}`),
+};
+
 export const accountsAPI = {
   getAccounts: (): Promise<AxiosResponse<{ accounts: Account[] }>> => 
     api.get('/accounts'),

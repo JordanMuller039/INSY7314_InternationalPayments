@@ -1,3 +1,28 @@
+const patterns = require('../utils/regex');
+
+describe('regex patterns', () => {
+  test('email pattern should match valid emails', () => {
+    const valid = [
+      'user@example.com',
+      'first.last+tag@sub.domain.co',
+      'a_b-c@domain.io'
+    ];
+
+    valid.forEach((e) => {
+      expect(patterns.email.test(e)).toBe(true);
+    });
+  });
+
+  test('accountNumber pattern should reject short values and accept 8+ digits', () => {
+    expect(patterns.accountNumber.test('1234567')).toBe(false);
+    expect(patterns.accountNumber.test('12345678')).toBe(true);
+  });
+
+  test('idNumber pattern should accept alphanumeric 5-20 chars', () => {
+    expect(patterns.idNumber.test('abc12')).toBe(true);
+    expect(patterns.idNumber.test('a')).toBe(false);
+  });
+});
 const test = require('node:test');
 const assert = require('node:assert');
 

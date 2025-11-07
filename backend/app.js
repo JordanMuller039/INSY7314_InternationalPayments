@@ -140,6 +140,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/transactions', require('./routes/transactions'));
 app.use('/api/payments', require('./routes/payments'));
+app.use('/api/users', require('./routes/users'));
 
 // 404 Error handling for invalid API endpoints
 app.use((req, res) => {
