@@ -1,0 +1,78 @@
+.admin-page {
+  padding: 24px;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.admin-header {
+  margin-bottom: 20px;
+}
+
+.admin-header h1 {
+  color: #0b57a4; /* deep blue */
+  margin: 0 0 6px 0;
+}
+
+.admin-sub {
+  color: #115b9d;
+  margin: 0;
+}
+
+.admin-main {
+  display: flex;
+  gap: 20px;
+}
+
+.card-blue {
+  background: linear-gradient(180deg, #e6f0fb 0%, #ffffff 100%);
+  border: 1px solid #bcd7f7;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(11,87,164,0.08);
+}
+
+.create-employee h2 {
+  color: #08386a;
+}
+
+.create-form .row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.create-form input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #cfe4fb;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.actions {
+  margin-top: 12px;
+}
+
+.btn-primary {
+  background: #0b57a4;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.success {
+  padding: 8px 10px;
+  background: #e6f7ea;
+  color: #0b6f3a;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.error {
+  padding: 8px 10px;
+  background: #fff1f2;
+  color: #8a1f1f;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}

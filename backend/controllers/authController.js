@@ -10,64 +10,82 @@ const generateToken = (userId) => {
   });
 };
 
-// User Registration Endpoint - Banking Account Creation
-// Route: POST /api/auth/register (Public access - anyone can create account)
+// Updated to give roles
 const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, idNumber, accountNumber } = req.body;
 
-    // Security Check: Prevent duplicate accounts (critical for banking)
-    // Check email, ID number, AND account number to prevent fraud
-    const existingUser = await User.findOne({
-      $or: [{ email }, { idNumber }, { accountNumber }]
-    });
+    // Normalize inputs for reliable duplicate checks
+    const emailNorm = email ? String(email).toLowerCase().trim() : undefined;
+    const idNumberNorm = idNumber ? String(idNumber).trim() : undefined;
+    const accountNumberNorm = accountNumber ? String(accountNumber).trim() : undefined;
+
+    // Build OR query only for provided values to avoid accidental matches
+    const orConditions = [];
+    if (emailNorm) orConditions.push({ email: emailNorm });
+    if (idNumberNorm) orConditions.push({ idNumber: idNumberNorm });
+
+    // Debug log to help trace unexpected duplicate detections
+    console.log('Register attempt:', { email: emailNorm, idNumber: idNumberNorm, accountNumber: accountNumberNorm });
+
+    let existingUser = null;
+    if (orConditions.length > 0) {
+      existingUser = await User.findOne({ $or: orConditions });
+      console.log('Existing user found during registration check:', existingUser ? existingUser._id : null);
+    }
 
     if (existingUser) {
       return res.status(400).json({
-        error: 'User already exists with this email, ID number, or account number'
+        error: 'User with this email or ID number already exists'
       });
     }
 
-    // Create new user
+    const role = req.path.includes('register-employee') ? 'employee' : 'customer';
+
     const user = new User({
       firstName,
       lastName,
-      email,
+      email: emailNorm,
       password,
-      idNumber,
-      accountNumber
+      idNumber: idNumberNorm,
+      accountNumber: accountNumberNorm,
+      role,
+      isVerified: true
     });
 
     await user.save();
 
-    // Create default checking account
     const account = new Account({
-      accountNumber,
+      accountNumber: accountNumberNorm,
       accountType: 'checking',
       userId: user._id,
-      currency: 'USD'
+      currency: 'USD',
+      balance: role === 'employee' ? 0 : 1000
     });
 
     await account.save();
 
-    // Generate token
-    const token = generateToken(user._id);
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
 
     res.status(201).json({
-      message: 'User registered successfully',
+      message: `${role === 'employee' ? 'Employee' : 'Customer'} registered successfully`,
       token,
       user: {
         id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        accountNumber: user.accountNumber,
         role: user.role
       }
     });
-
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ error: 'Server error during registration' });
+    res.status(500).json({ error: 'Registration failed. Please try again.' });
   }
 };
 

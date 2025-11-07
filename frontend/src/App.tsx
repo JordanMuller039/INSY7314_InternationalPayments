@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Payments from './pages/Payments';
 import Accounts from './pages/Accounts';
+import AdminDashboard from './pages/Admin';
 import './App.css';
 
 // Protected Route Component
@@ -64,6 +65,16 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Transactions />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin-only route */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              {user && user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/dashboard" />}
             </ProtectedRoute>
           }
         />

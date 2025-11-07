@@ -6,7 +6,7 @@ import { AxiosError } from 'axios';
 interface AuthContextType {
   user: User | null;
   token: string | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
@@ -44,31 +44,34 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const login = async (email: string, password: string) => {
-    try {
-      const response = await authAPI.login({ email, password });
-      const { token: newToken, user: userData } = response.data;
-      localStorage.setItem('token', newToken);
-      setToken(newToken);
-      setUser(userData);
-    } catch (error) {
-      const axiosError = error as AxiosError<{ error: string }>;
-      throw new Error(axiosError.response?.data?.error || 'Login failed');
-    }
-  };
+  const login = async (email: string, password: string): Promise<User> => {
+  try {
+    const response = await authAPI.login({ email, password });
+    const { token: newToken, user: userData } = response.data;
+    
+    localStorage.setItem('token', newToken);
+    setToken(newToken);
+    setUser(userData);
+    
+    return userData;
+  } catch (error) {
+    const axiosError = error as AxiosError<{ error: string }>;
+    throw new Error(axiosError.response?.data?.error || 'Login failed');
+  }
+};
 
   const register = async (data: RegisterData) => {
-    try {
-      const response = await authAPI.register(data);
-      const { token: newToken, user: userData } = response.data;
-      localStorage.setItem('token', newToken);
-      setToken(newToken);
-      setUser(userData);
-    } catch (error) {
-      const axiosError = error as AxiosError<{ error: string }>;
-      throw new Error(axiosError.response?.data?.error || 'Registration failed');
-    }
-  };
+  try {
+    const response = await authAPI.register(data);
+    const { token: newToken, user: userData } = response.data;
+    localStorage.setItem('token', newToken);
+    setToken(newToken);
+    setUser(userData);
+  } catch (error) {
+    const axiosError = error as AxiosError<{ error: string }>;
+    throw new Error(axiosError.response?.data?.error || 'Registration failed');
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('token');

@@ -16,8 +16,20 @@ const {
   updateProfile,
   changePassword
 } = require('../controllers/authController');
-
 const router = express.Router();
+
+console.log({
+  authType: typeof auth,
+  authorizeType: typeof authorize,
+  validateInputType: typeof validateInput,
+  validationRulesType: typeof validationRules,
+  registerType: typeof register,
+  loginType: typeof login,
+  getProfileType: typeof getProfile,
+  updateProfileType: typeof updateProfile,
+  changePasswordType: typeof changePassword,
+});
+
 
 // Rate limiting for auth endpoints
 const authLimiter = rateLimit({
@@ -31,9 +43,17 @@ const authLimiter = rateLimit({
 });
 
 // @route   POST /api/auth/register
-// @desc    Register new employee (Admin only)
-// @access  Private (Admin)
+// @desc    Register new customer (Public)
+// @access  Public
 router.post('/register', 
+  validateInput(validationRules.register),
+  register
+);
+
+// @route   POST /api/auth/register-employee
+// @desc    Create new employee (Admin only)
+// @access  Private (Admin)
+router.post('/register-employee', 
   auth,
   authorize('admin'),
   validateInput(validationRules.register),

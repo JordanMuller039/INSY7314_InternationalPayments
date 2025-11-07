@@ -39,6 +39,9 @@ export const authAPI = {
     api.post('/auth/login', data),
   getProfile: (): Promise<AxiosResponse<{ user: User }>> => 
     api.get('/auth/profile'),
+  // Admin-only employee creation
+  registerEmployee: (data: RegisterData): Promise<AxiosResponse<AuthResponse>> =>
+    api.post('/auth/register-employee', data),
 };
 
 export const accountsAPI = {

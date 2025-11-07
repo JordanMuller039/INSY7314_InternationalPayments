@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Home, CreditCard, Send, History } from 'lucide-react';
+import { LogOut, User, Home, CreditCard, Send, History, Building2 } from 'lucide-react';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -24,6 +24,12 @@ const Navbar = () => {
 
     {user && (
       <div className="navbar-links">
+        {user.role === 'admin' && (
+          <Link to="/admin" className="nav-link admin-link">
+            <Building2 size={18} />
+            <span>Admin</span>
+          </Link>
+        )}
         <Link to="/dashboard" className="nav-link">
           <Home size={18} />
           <span>Dashboard</span>
