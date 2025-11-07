@@ -2,6 +2,7 @@
 
 > **INSY7314 Task 2 - Secure Banking Application**  
 > A full-stack banking application with enterprise-grade security features for international payment processing
+> https://youtu.be/3mSb7oTOt1A
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
@@ -23,7 +24,6 @@
 - [Quick Start](#-quick-start)
 - [API Documentation](#-api-documentation)
 - [Testing](#-testing)
-- [Screenshots](#-screenshots)
 - [Team](#-team)
 - [License](#-license)
 
