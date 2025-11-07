@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "test": "node --test",
     "test:health": "node scripts/health-check.js",
+    "create-admin": "node scripts/create-admin.js",
     "test:api": "node test/banking-api.test.js",
     "test:security": "node test/security-headers.test.js",
     "test:all": "npm test && npm run test:api && npm run test:security",

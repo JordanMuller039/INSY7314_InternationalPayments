@@ -39,6 +39,17 @@ app.use(helmet({
   referrerPolicy: { policy: 'same-origin' } // Don't leak URLs to external sites
 }));
 
+// SECURITY LAYER 2: Additional attack protection
+const mongoSanitize = require('express-mongo-sanitize');
+
+// Prevent NoSQL injection attacks
+app.use(mongoSanitize({
+  replaceWith: '_',
+  onSanitize: ({ req, key }) => {
+    console.warn(`⚠️ Sanitized NoSQL injection attempt: ${key}`);
+  }
+}));
+
 // SECURITY LAYER 3: HTTP Parameter Pollution protection
 // Prevents attackers from sending duplicate parameters to confuse server
 app.use(hpp());
@@ -87,6 +98,14 @@ const limiter = rateLimit({
   legacyHeaders: false, // Don't use deprecated X-RateLimit headers
 });
 app.use(limiter);
+
+// SECURITY LAYER 6: Add security headers for additional protection
+app.use((req, res, next) => {
+  res.setHeader('X-DNS-Prefetch-Control', 'off');
+  res.setHeader('X-Download-Options', 'noopen');
+  res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
+  next();
+});
 
 // Request parsing with security limits
 // Limit payload size to prevent DoS attacks through large request bodies

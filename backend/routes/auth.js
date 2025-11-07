@@ -1,3 +1,10 @@
+
+/**
+ * Authentication Routes - Employee Portal
+ * Handles admin-controlled user creation and employee authentication
+ * Public registration disabled for security - employees created by admins only
+ */
+
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const { auth } = require('../middleware/auth');
@@ -14,8 +21,8 @@ const router = express.Router();
 
 // Rate limiting for auth endpoints
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 requests per windowMs for auth
+  windowMs: 15 * 60 * 1000, 
+  max: 5, 
   message: {
     error: 'Too many authentication attempts, please try again later.',
   },
@@ -24,10 +31,11 @@ const authLimiter = rateLimit({
 });
 
 // @route   POST /api/auth/register
-// @desc    Register new user
-// @access  Public
+// @desc    Register new employee (Admin only)
+// @access  Private (Admin)
 router.post('/register', 
-  authLimiter,
+  auth,
+  authorize('admin'),
   validateInput(validationRules.register),
   register
 );

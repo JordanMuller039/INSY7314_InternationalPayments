@@ -1,0 +1,39 @@
+# GitHub Actions - Additional Security Checks
+# Runs automated security scanning on every push
+
+name: Security Checks
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install Dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: Run NPM Audit
+      run: |
+        cd backend
+        npm audit --audit-level=moderate
+    
+    - name: Check for Secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
