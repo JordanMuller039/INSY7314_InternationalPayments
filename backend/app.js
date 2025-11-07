@@ -42,13 +42,26 @@ app.use(helmet({
 // SECURITY LAYER 2: Additional attack protection
 const mongoSanitize = require('express-mongo-sanitize');
 
-// Prevent NoSQL injection attacks
-app.use(mongoSanitize({
-  replaceWith: '_',
-  onSanitize: ({ req, key }) => {
-    console.warn(`⚠️ Sanitized NoSQL injection attempt: ${key}`);
-  }
-}));
+// Prevent NoSQL injection attacks - Express 5 safe version
+app.use((req, res, next) => {
+  const sanitize = (obj) => {
+    if (!obj || typeof obj !== 'object') return obj;
+    
+    for (let key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = obj[key].replace(/\$/g, '_').replace(/\./g, '_');
+      } else if (typeof obj[key] === 'object') {
+        sanitize(obj[key]);
+      }
+    }
+    return obj;
+  };
+
+  if (req.body) sanitize(req.body);
+  if (req.params) sanitize(req.params);
+  
+  next();
+});
 
 // SECURITY LAYER 3: HTTP Parameter Pollution protection
 // Prevents attackers from sending duplicate parameters to confuse server

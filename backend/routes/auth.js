@@ -7,7 +7,7 @@
 
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const { auth } = require('../middleware/auth');
+const { auth, authorize } = require('../middleware/auth');
 const { validateInput, validationRules } = require('../middleware/validation');
 const {
   register,
